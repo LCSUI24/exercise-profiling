@@ -9,6 +9,7 @@ import com.advpro.profiling.tutorial.repository.StudentRepository;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +32,7 @@ public class DataSeedService {
     private static final int NUMBER_OF_STUDENTS = 20_000;
     private static final int NUMBER_OF_COURSE = 10;
 
+    @Transactional
     public void seedStudent() {
         Faker faker = new Faker(new Locale("in-ID"));
 
@@ -44,7 +46,7 @@ public class DataSeedService {
             studentRepository.save(student);
         }
     }
-
+    @Transactional
     public void seedCourse() {
         Faker faker = new Faker(new Locale("in-ID"));
         for (int i = 0; i < NUMBER_OF_COURSE; i++) {
@@ -56,7 +58,7 @@ public class DataSeedService {
             courseRepository.save(course);
         }
     }
-
+    @Transactional
     public void seedStudentCourses() {
         List<Student> students = studentRepository.findAll();
         List<Course> courses = courseRepository.findAll();
